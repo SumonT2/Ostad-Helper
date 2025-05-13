@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ostad Helper", "Ostad Helper\Ostad Helper.csproj", "{0910D463-C9C5-4B39-B636-1920E0F33853}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0910D463-C9C5-4B39-B636-1920E0F33853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0910D463-C9C5-4B39-B636-1920E0F33853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0910D463-C9C5-4B39-B636-1920E0F33853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0910D463-C9C5-4B39-B636-1920E0F33853}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D9C9158-3B20-4D29-B5FC-2505434920FD}
+	EndGlobalSection
+EndGlobal

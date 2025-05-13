@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Enter Access Token";
+}
+<h2>Enter Access Token</h2>
+<form method="post">
+    <input type="text" name="token" placeholder="Access Token" required class="form-control" />
+    <button type="submit" class="btn btn-primary mt-2">Save</button>
+</form>
+@if (ViewBag.Error != null)
+{
+    <p class="text-danger">@ViewBag.Error</p>
+}
