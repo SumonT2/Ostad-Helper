@@ -1,4 +1,7 @@
-﻿namespace Ostad_Helper.Models
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace Ostad_Helper.Models
 {
 
     public partial class StudyPlanDetailsRoot
@@ -121,7 +124,8 @@
         public long? submission_deduction { get; set; }
         public string submission_id { get; set; }
         public long? submission_status { get; set; }
-      //  public long? submission_marks { get; set; }
+        [JsonConverter(typeof(FlexibleNullableIntConverter))]
+        public int? submission_marks { get; set; }
         public bool? has_completed { get; set; }
         public bool? is_late_submission { get; set; }
     }
@@ -140,4 +144,31 @@
         public string _id { get; set; }
         public long idx { get; set; }
     }
+
+
+    public class FlexibleNullableIntConverter : JsonConverter<int?>
+    {
+        public override int? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            if (reader.TokenType == JsonTokenType.Number && reader.TryGetInt32(out int i))
+                return i;
+
+            if (reader.TokenType == JsonTokenType.String)
+            {
+                var str = reader.GetString();
+                if (int.TryParse(str, out i)) return i;
+            }
+
+            return null;
+        }
+
+        public override void Write(Utf8JsonWriter writer, int? value, JsonSerializerOptions options)
+        {
+            if (value.HasValue)
+                writer.WriteNumberValue(value.Value);
+            else
+                writer.WriteNullValue();
+        }
+    }
+
 }
