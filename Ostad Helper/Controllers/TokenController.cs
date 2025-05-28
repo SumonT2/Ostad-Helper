@@ -16,7 +16,7 @@ namespace Ostad_Helper.Utils
             {
                 Response.Cookies.Append("AccessToken", token, new CookieOptions
                 {
-                    Expires = DateTimeOffset.UtcNow.AddHours(2),
+                    Expires = DateTimeOffset.UtcNow.AddDays(30),
                     HttpOnly = true,
                     Secure = true // Requires HTTPS
                 });
