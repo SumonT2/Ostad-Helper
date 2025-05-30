@@ -11,10 +11,29 @@
         <thead>
             <tr>
                 <th>
-                    ...
+                    Title
                 </th>
                 <th>
-                    ...
+                    Type
+                </th>
+                <th>
+                    Has Completed
+                </th>
+                <th>
+                    Grace Period Over
+                </th>
+
+                <th>
+
+                
+                    Duration
+                </th>
+
+                <th>
+                    Start Date
+                </th>
+                <th>
+                    Last Date
                 </th>
               
             </tr>
@@ -23,7 +42,7 @@
             @foreach (var item in Model)
             {
                 <tr class="">
-                    <td>
+                   @*  <td>
                         @item._id
                     </td>
                     <td>
@@ -31,26 +50,17 @@
                     </td>
                     <td>
                         @item.study_plan
-                    </td>
-
-                    <td>
-                        @item.title
-                    </td>
-
+                    </td> *@
+                    <td><a href="https://ostad.app/dashboard/my-courses/@item.batch/module/@item.study_plan" target="_blank">@item.title</a></td>
                     <td>
                         @item.type
                     </td>
-                    <td>
-                        @item.live_class_type
-                    </td>
+                   
                     <td>
                         @item.has_completed
                     </td>
                     <td>
                         @item.grace_period_over
-                    </td>
-                    <td>
-                        @item.start_date_time
                     </td>
                     <td>
                         @item.duration
@@ -61,9 +71,6 @@
                     </td>
                     <td>
                         @item.last_submission_date
-                    </td>
-                    <td>
-                        @item.is_published
                     </td>
                     <td>
                         
