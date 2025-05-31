@@ -4,13 +4,13 @@ namespace Ostad_Helper.Utils
     public class TokenController : Controller
     {
         [HttpGet]
-        public IActionResult Enter()
+        public IActionResult EnterToken()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Enter(string token)
+        public IActionResult EnterToken(string token)
         {
             if (!string.IsNullOrWhiteSpace(token))
             {

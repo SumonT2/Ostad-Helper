@@ -24,7 +24,7 @@ namespace Ostad_Helper.Utils
             {
                 // Log: Missing token
                 System.Diagnostics.Debug.WriteLine($"No AccessToken found for URL: {url}");
-                context.Response.Redirect("/Token/Enter");
+                context.Response.Redirect("/Token/EnterToken");
                 return null;
             }
 
@@ -40,7 +40,7 @@ namespace Ostad_Helper.Utils
                 System.Diagnostics.Debug.WriteLine($"API call to {url} failed with status: {response.StatusCode}");
                 if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    context.Response.Redirect("/Token/Enter");
+                    context.Response.Redirect("/Token/EnterToken");
                     return null;
                 }
                 // Return the response for other errors (e.g., 429, 500) to let the caller handle it
