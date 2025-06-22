@@ -52,8 +52,6 @@ public class HomeController : Controller
 
         return View(model: batchresult);
     }
-
-  
     public async Task<IActionResult> StudyPlansAsync()
     {
 
@@ -327,9 +325,42 @@ public class HomeController : Controller
     #endregion
 
     // Study Plan Details with Cache
+    //public async Task<IActionResult> StudyPlanDetailsAsync()
+    //{
+    //    var stdline = new List<StudyPlanDetailsTimeline>();
+    //    var cache = await StudyPlanCacheHelper.LoadCacheAsync();
+
+    //    foreach (var item in cache.Items)
+    //    {
+    //        var tasks = item.StudyPlanIds.Select(async planId =>
+    //        {
+    //            var response = await _apiClient.GetAsync(ApiEndpoints.StudyPlanDetails(planId));
+    //            if (response == null)
+    //                return new List<StudyPlanDetailsTimeline>();
+
+    //            var json = await response.Content.ReadAsStringAsync();
+    //            var apiData = JsonSerializer.Deserialize<StudyPlanDetailsRoot>(json, new JsonSerializerOptions
+    //            {
+    //                PropertyNameCaseInsensitive = true
+    //            });
+
+    //            return apiData?.data?.timeline
+    //                ?.Where(x => new[] { "quiz", "assignment", "practice_coding_test", "project", "written" }.Contains(x.type))
+    //                .ToList() ?? new();
+    //        }).ToList();
+
+    //        stdline.AddRange((await Task.WhenAll(tasks)).SelectMany(x => x));
+    //    }
+
+    //    if (!stdline.Any())
+    //        return new EmptyResult();
+
+    //    return View(stdline.OrderBy(x => x.last_submission_date).ToList());
+    //}
+
     public async Task<IActionResult> StudyPlanDetailsAsync()
     {
-        var stdline = new List<StudyPlanDetailsTimeline>();
+        var resultList = new List<StudyPlanDetailsRoot>();
         var cache = await StudyPlanCacheHelper.LoadCacheAsync();
 
         foreach (var item in cache.Items)
@@ -338,7 +369,7 @@ public class HomeController : Controller
             {
                 var response = await _apiClient.GetAsync(ApiEndpoints.StudyPlanDetails(planId));
                 if (response == null)
-                    return new List<StudyPlanDetailsTimeline>();
+                    return null;
 
                 var json = await response.Content.ReadAsStringAsync();
                 var apiData = JsonSerializer.Deserialize<StudyPlanDetailsRoot>(json, new JsonSerializerOptions
@@ -346,18 +377,19 @@ public class HomeController : Controller
                     PropertyNameCaseInsensitive = true
                 });
 
-                return apiData?.data?.timeline
-                    ?.Where(x => new[] { "quiz", "assignment", "practice_coding_test", "project", "written" }.Contains(x.type))
-                    .ToList() ?? new();
+                return apiData;
             }).ToList();
 
-            stdline.AddRange((await Task.WhenAll(tasks)).SelectMany(x => x));
+            var plans = await Task.WhenAll(tasks);
+
+            resultList.AddRange(plans.Where(p => p?.data?.timeline?.Any() == true));
         }
 
-        if (!stdline.Any())
+        if (!resultList.Any())
             return new EmptyResult();
 
-        return View(stdline.OrderBy(x => x.last_submission_date).ToList());
+        // Optional: sort timelines inside each plan, or flatten if needed in view
+        return View(resultList);
     }
 
     public async Task<IActionResult> GenerateStudyPlanCache()
@@ -383,18 +415,16 @@ public class HomeController : Controller
             {
                 PropertyNameCaseInsensitive = true
             });
-
             var studyPlanIds = stdRoot?.data.study_plans.Select(p => p._id).ToList() ?? new();
             cache.Items.Add(new CachedStudyPlanInfo
             {
                 BatchId = batch._id,
+                BatchCode=batch.batch_code,
+                BatchTitle=batch.course_snapshot.title,
                 StudyPlanIds = studyPlanIds
             });
         }
-
         await StudyPlanCacheHelper.SaveCacheAsync(cache);
         return Content("Cache saved successfully");
     }
-
-
 }

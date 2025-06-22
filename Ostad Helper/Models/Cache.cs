@@ -3,6 +3,8 @@
     public class CachedStudyPlanInfo
     {
         public string BatchId { get; set; }
+        public string BatchCode { get; set; }
+        public string BatchTitle { get; set; }
         public List<string> StudyPlanIds { get; set; }
     }
 

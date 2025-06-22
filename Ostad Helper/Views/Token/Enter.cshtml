@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Enter Token";
+}
+
+<div class="container mt-5">
+    <h2>Enter Access Token</h2>
+
+    <form method="post" action="/Token/Enter">
+        <div class="mb-3">
+            <label for="token" class="form-label">Access Token (JWT)</label>
+            <textarea class="form-control" id="token" name="token" rows="5" placeholder="Paste your JWT token here..."></textarea>
+        </div>
+
+        <div id="token-info" class="card mt-4 d-none p-3">
+            <div class="row g-3">
+                <!-- Avatar -->
+                <div class="col-md-3 text-center">
+                    <img id="avatar" src="" class="img-fluid rounded-circle border border-secondary" style="max-width: 150px;" />
+                </div>
+
+                <!-- Token Details -->
+                <div class="col-md-9">
+                    <h5 class="card-title">Decoded Token Info</h5>
+                    <p><strong>Name:</strong> <span id="name"></span></p>
+                    <p><strong>Email:</strong> <span id="email"></span></p>
+                    <p><strong>Phone:</strong> <span id="phone"></span></p>
+                    <p><strong>Expires In:</strong> <span id="expires"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3">Save Token</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function decodeJWT(token) {
+            try {
+                var parts = token.split('.');
+                if (parts.length !== 3) return null;
+
+                var base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+                var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+
+                return JSON.parse(jsonPayload);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function getRemainingTime(exp) {
+            const now = new Date();
+            const expiry = new Date(exp * 1000);
+            const diff = expiry - now;
+
+            if (diff <= 0) return "Expired";
+
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const hours = Math.floor((diff / 1000 / 60 / 60) % 24);
+            const days = Math.floor(diff / 1000 / 60 / 60 / 24);
+
+            return `${days} days, ${hours} hours, ${minutes} minutes`;
+        }
+
+        $(document).ready(function () {
+            $('#token').on('input', function () {
+                const token = $(this).val().trim();
+                const decoded = decodeJWT(token);
+
+                if (decoded && decoded.exp) {
+                    $('#name').text(decoded.name || '-');
+                    $('#email').text(decoded.email || '-');
+                    $('#phone').text(decoded.phone || decoded.phone_number || '-');
+                    $('#expires').text(getRemainingTime(decoded.exp));
+                            console.log('Avatar:', decoded.avatar);
+        console.log('Image URL:', 'https://cdn.ostad.app/' + decoded.avatar);
+
+                    if (decoded.avatar) {
+                        $('#avatar').attr('src', 'https://cdn.ostad.app/' + decoded.avatar).show();
+                    } else {
+                        $('#avatar').hide();
+                    }
+
+                    $('#token-info').removeClass('d-none');
+                } else {
+                    $('#token-info').addClass('d-none');
+                }
+            });
+        });
+    </script>
+}

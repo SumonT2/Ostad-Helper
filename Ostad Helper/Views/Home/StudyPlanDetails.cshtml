@@ -1,4 +1,4 @@
-﻿@model List<Ostad_Helper.Models.StudyPlanDetailsTimeline>
+﻿@model List<Ostad_Helper.Models.StudyPlanDetailsRoot>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -25,7 +25,7 @@
 
                 <th>
 
-                
+
                     Duration
                 </th>
 
@@ -35,14 +35,22 @@
                 <th>
                     Last Date
                 </th>
-              
+
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var modeldata in Model)
             {
-                <tr class="">
-                   @*  <td>
+                
+                @foreach (var item in modeldata.data.timeline
+                            .Where(x => new[] { "quiz", "assignment", "practice_coding_test", "project", "written" }
+              // .Contains(x.type)).OrderBy(x => x.is_late_submission).Where(p => (p.last_submission_date > DateTime.UtcNow && p.last_submission_date < DateTime.UtcNow.AddDays(7)) || (p.submission_start_date < DateTime.UtcNow && p.submission_start_date > DateTime.UtcNow.AddDays(7))))
+               .Contains(x.type)).OrderBy(x => x.is_late_submission)
+               )
+
+                {
+                    <tr class="">
+                        @*  <td>
                         @item._id
                     </td>
                     <td>
@@ -51,30 +59,40 @@
                     <td>
                         @item.study_plan
                     </td> *@
-                    <td><a href="https://ostad.app/dashboard/my-courses/@item.batch/module/@item.study_plan" target="_blank">@item.title</a></td>
-                    <td>
-                        @item.type
-                    </td>
-                   
-                    <td>
-                        @item.has_completed
-                    </td>
-                    <td>
-                        @item.grace_period_over
-                    </td>
-                    <td>
-                        @item.duration
-                    </td>
-                    
-                    <td>
-                        @item.submission_start_date
-                    </td>
-                    <td>
-                        @item.last_submission_date
-                    </td>
-                   
+                        <td>
+                            @modeldata.data.batch.course_snapshot.title
+                        </td>
+                        <td>
+                            @modeldata.data.title
+                        </td>
+                        <td><a href="https://ostad.app/dashboard/my-courses/@item.batch/module/@item.study_plan" target="_blank">@item.title</a></td>
+                        <td>
+                            @item.type
+                        </td>
 
-                </tr>
+                        <td>
+                            @item.has_completed
+                        </td>
+                        <td>
+                            @item.grace_period_over
+                        </td>
+                        <td>
+                            @item.duration
+                        </td>
+
+                        <td>
+                            @item.submission_start_date
+                        </td>
+                        <td>
+                            @item.last_submission_date
+                        </td>
+
+
+                    </tr>
+                    
+                }
+
+               
             }
         </tbody>
     </table>

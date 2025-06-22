@@ -2,6 +2,8 @@
   "Items": [
     {
       "BatchId": "67d133268522c9bf0e68705b",
+      "BatchCode": "php laravel 8",
+      "BatchTitle": "Full Stack Web Development with PHP, Laravel & Vue Js",
       "StudyPlanIds": [
         "67d133268522c9bf0e68705f",
         "67d133278522c9bf0e6870e5",
@@ -10,6 +12,7 @@
         "67d133288522c9bf0e6870f9",
         "67d133298522c9bf0e687105",
         "67d133288522c9bf0e6870ff",
+        "683d33421af9bde237756442",
         "67d133298522c9bf0e68710d",
         "67d133298522c9bf0e687113",
         "67d133298522c9bf0e687119",
@@ -39,6 +42,8 @@
     },
     {
       "BatchId": "67b8df36a1d6a959b3218c20",
+      "BatchCode": "ASP.NET 6",
+      "BatchTitle": "Full Stack Web Development with ASP.Net Core",
       "StudyPlanIds": [
         "67f7956b5d54a13d6588a885",
         "67b8df36a1d6a959b3218c24",
@@ -49,8 +54,8 @@
         "67b8df3ba1d6a959b3218ce5",
         "67b8df3aa1d6a959b3218cc9",
         "6832c10cc5f74cf00e922382",
-        "67b8df39a1d6a959b3218cb1",
         "67b8df44a1d6a959b3218de9",
+        "67b8df39a1d6a959b3218cb1",
         "67b8df3ca1d6a959b3218cfb",
         "67b8df3ea1d6a959b3218d27",
         "67b8df3ea1d6a959b3218d3e",
@@ -70,6 +75,8 @@
     },
     {
       "BatchId": "67b87d2768c8b55991a10435",
+      "BatchCode": "Mastering DevOps 2",
+      "BatchTitle": "Mastering DevOps: From Fundamentals to Advanced Practices",
       "StudyPlanIds": [
         "67b87d2868c8b55991a10439",
         "67da649c6181c2e3f30e5ef6",
@@ -82,6 +89,7 @@
         "67b87d2968c8b55991a104a7",
         "67b87d2a68c8b55991a104af",
         "6839744a18c712851bad2cbd",
+        "683eb4f51af9bde2377c5c4c",
         "67b87d2a68c8b55991a104c1",
         "67b87d2a68c8b55991a104b6",
         "67b87d2b68c8b55991a104ce"
@@ -89,6 +97,8 @@
     },
     {
       "BatchId": "676ed160c371a788d0dfe74a",
+      "BatchCode": "mernstack 10",
+      "BatchTitle": "Full Stack Web Development with JavaScript (MERN)",
       "StudyPlanIds": [
         "676ed17fc371a788d0dfeb5e",
         "676ed190c371a788d0dfef0f",
@@ -124,6 +134,8 @@
     },
     {
       "BatchId": "672a1282474c0ab783efefa8",
+      "BatchCode": "Web Development with Python Django 4",
+      "BatchTitle": "Full Stack Web Development with Python, Django & React",
       "StudyPlanIds": [
         "672a12b5474c0ab783eff60b",
         "672a1284474c0ab783eff034",
@@ -162,8 +174,8 @@
         "672a12bd474c0ab783eff738",
         "672a129e474c0ab783eff3a4",
         "672a12ae474c0ab783eff564",
-        "672a129f474c0ab783eff3ba",
         "672a12a9474c0ab783eff4ca",
+        "672a129f474c0ab783eff3ba",
         "672a12ba474c0ab783eff6fb",
         "672a12bb474c0ab783eff70b",
         "672a12bb474c0ab783eff719",
@@ -174,6 +186,8 @@
     },
     {
       "BatchId": "66c87537ca27f82d4d6e4c78",
+      "BatchCode": "flutter 9",
+      "BatchTitle": "App Development with Flutter",
       "StudyPlanIds": [
         "66c8753fca27f82d4d6e4f7a",
         "66c87537ca27f82d4d6e4c7c",
