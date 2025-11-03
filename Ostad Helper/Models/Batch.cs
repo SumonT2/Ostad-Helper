@@ -85,7 +85,7 @@
         public long __v { get; set; }
         public long count_modules { get; set; }
         public long count_learners { get; set; }
-        public long count_days { get; set; }
+      //  public long count_days { get; set; }
         public string head_tutor { get; set; }
         public BatchSkillMap skillMap { get; set; }
         public string cert_title_text { get; set; }

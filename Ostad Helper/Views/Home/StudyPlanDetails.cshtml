@@ -2,344 +2,159 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Content"] = "Exam Schedules";
+    var bdTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Bangladesh Standard Time");
+    var nowBD = TimeZoneInfo.ConvertTime(DateTimeOffset.UtcNow, bdTimeZone);
 }
 
-<h3>Courses</h3>
-
 <div class="container-fluid">
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>
-                    Title
-                </th>
-                <th>
-                    Type
-                </th>
-                <th>
-                    Has Completed
-                </th>
-                <th>
-                    Grace Period Over
-                </th>
+<div class="col-md-12">
+    <div class="card mb-12">
+            <div class="card-header border-0">
+                <h5 class="card-title">Schedules for Assignments, Quizzes, Live Exams, and Projects</h5>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse">
+                    <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                    <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                </button>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body" style="box-sizing: border-box; display: block;">
+            <!--begin::Row-->
+            <div class="row">
+                <table id="studyPlanTable" class="table table-bordered table-striped dataTable dtr-inline">
+                    <thead>
+                        <tr>
+                            <th>
+                                Course Title
+                            </th>
+                            <th>
+                                Module
+                            </th>
+                            <th>
+                                Module URL
+                            </th>
+                            <th>
+                                Type
+                            </th>
 
-                <th>
+                            <th>
+                                Duration
+                            </th>
 
+                            <th>
+                                Start Date
+                            </th>
+                            <th>
+                                Last Date
+                            </th>
+                            <th>
+                                Status
+                            </th>
 
-                    Duration
-                </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var modeldata in Model)
+                        {
 
-                <th>
-                    Start Date
-                </th>
-                <th>
-                    Last Date
-                </th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var modeldata in Model)
-            {
-                
-                @foreach (var item in modeldata.data.timeline
-                            .Where(x => new[] { "quiz", "assignment", "practice_coding_test", "project", "written" }
-              // .Contains(x.type)).OrderBy(x => x.is_late_submission).Where(p => (p.last_submission_date > DateTime.UtcNow && p.last_submission_date < DateTime.UtcNow.AddDays(7)) || (p.submission_start_date < DateTime.UtcNow && p.submission_start_date > DateTime.UtcNow.AddDays(7))))
-               .Contains(x.type)).OrderBy(x => x.is_late_submission)
-               )
-
-                {
-                    <tr class="">
-                        @*  <td>
-                        @item._id
-                    </td>
-                    <td>
-                        @item.batch
-                    </td>
-                    <td>
-                        @item.study_plan
-                    </td> *@
-                        <td>
-                            @modeldata.data.batch.course_snapshot.title
-                        </td>
-                        <td>
-                            @modeldata.data.title
-                        </td>
-                        <td><a href="https://ostad.app/dashboard/my-courses/@item.batch/module/@item.study_plan" target="_blank">@item.title</a></td>
-                        <td>
-                            @item.type
-                        </td>
-
-                        <td>
-                            @item.has_completed
-                        </td>
-                        <td>
-                            @item.grace_period_over
-                        </td>
-                        <td>
-                            @item.duration
-                        </td>
-
-                        <td>
-                            @item.submission_start_date
-                        </td>
-                        <td>
-                            @item.last_submission_date
-                        </td>
+                            @foreach (var item in modeldata.data.timeline
+                           .Where(x => new[] { "quiz", "assignment", "practice_coding_test", "project", "written" }
+                           // .Contains(x.type)).OrderBy(x => x.is_late_submission).Where(p => (p.last_submission_date > DateTime.UtcNow && p.last_submission_date < DateTime.UtcNow.AddDays(7)) || (p.submission_start_date < DateTime.UtcNow && p.submission_start_date > DateTime.UtcNow.AddDays(7))))
+                           .Contains(x.type)).OrderBy(x => x.is_late_submission)
+                           )
 
 
-                    </tr>
-                    
+
+                            {
+
+                                DateTime? startBD = item.submission_start_date.HasValue
+                                ? TimeZoneInfo.ConvertTime(item.submission_start_date.Value, bdTimeZone).DateTime
+                                : (DateTime?)null;
+
+                                DateTime? endBD = item.last_submission_date.HasValue
+                                ? TimeZoneInfo.ConvertTime(item.last_submission_date.Value, bdTimeZone).DateTime
+                                : (DateTime?)null;
+
+                                string status;
+
+                                if (item.has_completed == true)
+                                {
+                                    status = "Completed";
+                                }
+                                else if (!endBD.HasValue)
+                                {
+                                    status = startBD.HasValue && nowBD < startBD ? "Upcoming" : "Expired";
+                                }
+                                else if (startBD.HasValue && endBD.HasValue)
+                                {
+                                    status = nowBD < startBD ? "Upcoming"
+                                    : nowBD <= endBD ? "Ongoing"
+                                    : "Expired";
+                                }
+                                else
+                                {
+                                    status = "";
+                                }
+                                <tr class="">
+                                    <td>
+                                        @modeldata.data.batch.course_snapshot.title
+                                    </td>
+                                    <td>
+                                        @modeldata.data.title
+                                    </td>
+                                    <td><a href="https://ostad.app/dashboard/my-courses/@item.batch/module/@item.study_plan" target="_blank">@item.title</a></td>
+                                    <td>
+                                        @item.type
+                                    </td>
+                                    <td>
+                                        @item.duration
+                                    </td>
+
+                                    <td>
+                                        @startBD
+                                    </td>
+                                    <td>
+                                        @endBD
+
+                                    </td>
+
+                                    <td>@status</td>
+
+                                </tr>
+
+                            }
+
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!--end::Row-->
+        </div>
+        <!-- ./card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+
+
+</div>
+<div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+           
+            $('#studyPlanTable').DataTable({
+                pageLength: 6,
+                order: [], // disable initial sort
+                responsive: true,
+                language: {
+                    searchPlaceholder: "Search modules or types..."
                 }
+            });
+        });
+    </script>
+}
 
-               
-            }
-        </tbody>
-    </table>
-</div>
-<div>
-</div>
-@* <div>
-    <h4>BatchResult</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model._id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model._id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.batch_code)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.batch_code)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.venue)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.venue)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.count_resource)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.count_resource)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.count_live)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.count_live)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.count_live_premium)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.count_live_premium)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.count_assignment)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.count_assignment)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.count_project)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.count_project)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.count_exam)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.count_exam)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.count_vod)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.count_vod)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.course_kind)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.course_kind)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.completion_cert_for_all)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.completion_cert_for_all)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.batch_finish_image_provided)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.batch_finish_image_provided)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.is_module)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.is_module)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.has_pro_batch)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.has_pro_batch)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.is_pro_batch)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.is_pro_batch)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.is_on_demand)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.is_on_demand)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.is_published)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.is_published)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.has_report_card)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.has_report_card)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.piku_inbox_id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.piku_inbox_id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.piku_website_token)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.piku_website_token)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.enable_piku)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.enable_piku)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.enable_live_recording_copy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.enable_live_recording_copy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.batch_no)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.batch_no)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.schedule)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.schedule)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.schedule_date)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.schedule_date)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.schedule_type)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.schedule_type)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.course)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.course)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.max_capacity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.max_capacity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.createdAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.createdAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.updatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.updatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.idx)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.idx)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.__v)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.__v)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.count_modules)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.count_modules)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.count_learners)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.count_learners)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.count_days)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.count_days)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.head_tutor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.head_tutor)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.cert_title_text)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.cert_title_text)
-        </dd>
-    </dl>
-</div> *@
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>

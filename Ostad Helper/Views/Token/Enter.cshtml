@@ -1,37 +1,72 @@
 ﻿@{
-    ViewData["Title"] = "Enter Token";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Insert Token";
+    ViewData["Content"] = "Insert Token";
 }
 
-<div class="container mt-5">
-    <h2>Enter Access Token</h2>
 
-    <form method="post" action="/Token/Enter">
-        <div class="mb-3">
-            <label for="token" class="form-label">Access Token (JWT)</label>
-            <textarea class="form-control" id="token" name="token" rows="5" placeholder="Paste your JWT token here..."></textarea>
-        </div>
 
-        <div id="token-info" class="card mt-4 d-none p-3">
-            <div class="row g-3">
-                <!-- Avatar -->
-                <div class="col-md-3 text-center">
-                    <img id="avatar" src="" class="img-fluid rounded-circle border border-secondary" style="max-width: 150px;" />
-                </div>
-
-                <!-- Token Details -->
-                <div class="col-md-9">
-                    <h5 class="card-title">Decoded Token Info</h5>
-                    <p><strong>Name:</strong> <span id="name"></span></p>
-                    <p><strong>Email:</strong> <span id="email"></span></p>
-                    <p><strong>Phone:</strong> <span id="phone"></span></p>
-                    <p><strong>Expires In:</strong> <span id="expires"></span></p>
-                </div>
+<div class="col-md-12">
+    <div class="card mb-12">
+        <div class="card-header border-0">
+            <h5 class="card-title">Token goes here. Magic happens after.</h5>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse">
+                    <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                    <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                </button>
             </div>
         </div>
+        <!-- /.card-header -->
+        <div class="card-body" style="box-sizing: border-box; display: block;">
+            <!--begin::Row-->
+            <div class="row">
 
-        <button type="submit" class="btn btn-success mt-3">Save Token</button>
-    </form>
+                    <form method="post" action="/Token/Enter">
+                        <div class="mb-3">
+                            <label for="token" class="form-label">Access Token (JWT)</label>
+                            <textarea class="form-control" id="token" name="token" rows="5" placeholder="Paste your JWT token here..."></textarea>
+                        </div>
+
+                        <div id="token-info" class="card mt-4 d-none p-3">
+                            <div class="row g-3">
+                                <!-- Avatar -->
+                                <div class="col-md-3 text-center">
+                                    <img id="avatar" src="" class="img-fluid rounded-circle border border-secondary" style="max-width: 150px;" />
+                                </div>
+
+                                <!-- Token Details -->
+                                <div class="col-md-12">
+                                <h5 class="mb-3 fw-bold">Decoded Token Info</h5>
+                                    <p><strong>Name:</strong> <span id="name"></span></p>
+                                    <p><strong>Email:</strong> <span id="email"></span></p>
+                                    <p><strong>Phone:</strong> <span id="phone"></span></p>
+                                    <p><strong>Expires In:</strong> <span id="expires"></span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success mt-3">Save Token</button>
+                    </form>
+
+
+
+            </div>
+            <!--end::Row-->
+        </div>
+        <!-- ./card-body -->
+    </div>
+    <!-- /.card -->
 </div>
+
+
+
+
+
+
+
+
+
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -93,3 +128,7 @@
         });
     </script>
 }
+
+
+
+

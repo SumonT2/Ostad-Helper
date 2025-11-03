@@ -19,19 +19,16 @@
         }
 }
 }
-
-
-
 <!doctype html>
 <html lang="en">
 <!--begin::Head-->
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>AdminLTE 4 | Fixed Sidebar</title>
+    <title>Ostad Helper</title>
   <!--begin::Primary Meta Tags-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="title" content="AdminLTE 4 | Fixed Sidebar" />
+  <meta name="title" content="Ostad Helper" />
   <meta name="author" content="ColorlibHQ" />
   <meta name="description"
     content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS." />
@@ -52,7 +49,10 @@
   <!--end::Third Party Plugin(Bootstrap Icons)-->
   <!--begin::Required Plugin(AdminLTE)-->
   <link rel="stylesheet" href="/theme/css/adminlte.css" />
-  <!--end::Required Plugin(AdminLTE)-->
+    <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.3.2/datatables.min.css" rel="stylesheet" integrity="sha384-oy6ZmHnH9nTuDaccEOUPX5BSJbGKwDpz3u3XiFJBdNXDpAAZh28v/4zfMCU7o63p" crossorigin="anonymous">
+
+
+    <!--end::Required Plugin(AdminLTE)-->
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -71,14 +71,17 @@
               <i class="bi bi-list"></i>
             </a>
           </li>
-          <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Home</a></li>
-          <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Contact</a></li>
+          
+@*           <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Home</a></li>
+          <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Contact</a></li> 
+          -->Commented by Sumon on 2-Aug-2025
+          *@
         </ul>
         <!--end::Start Navbar Links-->
         <!--begin::End Navbar Links-->
         <ul class="navbar-nav ms-auto">
           <!--begin::Navbar Search-->
-          <li class="nav-item">
+@*           <li class="nav-item">
             <a class="nav-link" data-widget="navbar-search" href="#" role="button">
               <i class="bi bi-search"></i>
             </a>
@@ -189,7 +192,9 @@
               <a href="#" class="dropdown-item dropdown-footer"> See All Notifications </a>
             </div>
           </li>
-          <!--end::Notifications Dropdown Menu-->
+          <!--end::Notifications Dropdown Menu--> 
+          --> Commented by Sumon on 2-Aug-2025
+          *@
           <!--begin::Fullscreen Toggle-->
           <li class="nav-item">
             <a class="nav-link" href="#" data-lte-toggle="fullscreen">
@@ -218,11 +223,11 @@
               <!--begin::Menu Body-->
               <li class="user-body">
                 <!--begin::Row-->
-                <div class="row">
+@*                 <div class="row">
                   <div class="col-4 text-center"><a href="#">Followers</a></div>
                   <div class="col-4 text-center"><a href="#">Sales</a></div>
                   <div class="col-4 text-center"><a href="#">Friends</a></div>
-                </div>
+                </div> *@
                 <!--end::Row-->
               </li>
               <!--end::Menu Body-->
@@ -248,10 +253,10 @@
         <!--begin::Brand Link-->
         <a href="../index.html" class="brand-link">
           <!--begin::Brand Image-->
-          <img src="/theme/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow" />
+          <img src="/theme/assets/img/oshLogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow" />
           <!--end::Brand Image-->
           <!--begin::Brand Text-->
-          <span class="brand-text fw-light">AdminLTE 4</span>
+          <span class="brand-text fw-light">Ostad Helper</span>
           <!--end::Brand Text-->
         </a>
         <!--end::Brand Link-->
@@ -294,36 +299,31 @@
                     <p>Course List</p>
                   </a>
                 </li>
-                <li class="nav-item">
+@*                 <li class="nav-item">
                   <a href="../index.html" class="nav-link">
                     <i class="nav-icon bi bi-circle"></i>
                     <p>Study Plan</p>
                   </a>
-                </li>
-                <li class="nav-item">
+                </li> *@
+@*                 <li class="nav-item">
                   <a href="../index.html" class="nav-link">
                     <i class="nav-icon bi bi-circle"></i>
                     <p>Live Classes</p>
                   </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../index.html" class="nav-link">
-                    <i class="nav-icon bi bi-circle"></i>
-                    <p>Exam</p>
-                  </a>
-                </li>
+                </li> *@
                 <li class="nav-item">
                                     <a asp-area="" asp-controller="Home" asp-action="StudyPlanDetails" class="nav-link">
                     <i class="nav-icon bi bi-circle"></i>
-                    <p>Study Plan Details</p>
+                    <p>Schedules</p>
                   </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-area="" asp-controller="Home" asp-action="GenerateStudyPlanCache" class="nav-link">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>Generate Cache</p>
-                                    </a>
-                                </li>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="" asp-controller="Home" asp-action="GenerateStudyPlanCache" class="nav-link">
+                        <i class="nav-icon bi bi-circle"></i>
+                        <p>Generate Cache</p>
+                    </a>
+                </li>
+
               </ul>
             </li>
 
@@ -337,24 +337,24 @@
                   <i class="nav-arrow bi bi-chevron-right"></i>
                 </p>
               </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
+             <ul class="nav nav-treeview">
+               @*  <li class="nav-item">
                   <a href="#" class="nav-link">
                     <i class="nav-icon bi bi-box-arrow-in-right"></i>
                     <p>
                       Token Details
                     </p>
                   </a>
+                </li> *@
+                <li class="nav-item">
+                                <a asp-area="" asp-controller="Token" asp-action="Enter" class="nav-link">
+                                    <i class="nav-icon bi bi-circle"></i>
+                                    <p>Token</p>
+                                </a>
                 </li>
-                <li class="nav-item"></li>
-                <a href="../examples/lockscreen.html" class="nav-link">
-                  <i class="nav-icon bi bi-circle"></i>
-                  <p>Set New Token</p>
-                </a>
-            </li>
-          </ul>
+            </ul>
           </li>
-          <li class="nav-header">MULTI LEVEL EXAMPLE</li>
+@*           <li class="nav-header">MULTI LEVEL EXAMPLE</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon bi bi-circle-fill"></i>
@@ -425,7 +425,7 @@
               <i class="nav-icon bi bi-circle text-info"></i>
               <p>Informational</p>
             </a>
-          </li>
+          </li> *@
           </ul>
           <!--end::Sidebar Menu-->
         </nav>
@@ -447,7 +447,7 @@
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-end">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">@ViewData["Content"]</li>
+                <li class="breadcrumb-item active" aria-current="page">@ViewData["Content"]</li>
               </ol>
             </div>
           </div>
@@ -505,6 +505,9 @@
   <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
   <script src="/theme/js/adminlte.js"></script>
   <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+    <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.3.2/datatables.min.js" integrity="sha384-F5wD4YVHPFcdPbOt91vfXz6ZUTjeWsy4mJlvR4duPvlQdnq704Bh6DxV1BJy3gA2" crossorigin="anonymous"></script>
+    
+
   <script>
     const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
     const Default = {
@@ -524,6 +527,33 @@
         });
       }
     });
+        $(function () {
+            var url = window.location.pathname;
+
+            // Normalize trailing slash
+            if (url.length > 1 && url.endsWith('/')) {
+                url = url.slice(0, -1);
+            }
+
+            // Match both sidebar and treeview links
+            $('.sidebar-menu a.nav-link').each(function () {
+                var href = $(this).attr('href');
+
+                if (href && href.length > 1 && href.endsWith('/')) {
+                    href = href.slice(0, -1);
+                }
+
+                if (href === url) {
+                    $(this).addClass('active');
+
+                    // Expand treeview if nested
+                    $(this).parentsUntil('.sidebar-menu', '.nav-treeview').css('display', 'block');
+                    $(this).parentsUntil('.sidebar-menu', '.nav-item').addClass('menu-open');
+                    $(this).parentsUntil('.sidebar-menu', '.nav-item').children('.nav-link').first().addClass('active');
+                }
+            });
+        });
+
   </script>
   @await RenderSectionAsync("Scripts", required: false)
   <!--end::OverlayScrollbars Configure-->

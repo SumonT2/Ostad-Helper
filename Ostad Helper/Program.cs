@@ -26,6 +26,6 @@ app.UseAuthorization();
 app.UseMiddleware<JwtDecodeMiddleware>();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=StudyPlanDetails}/{id?}");
 
 app.Run();

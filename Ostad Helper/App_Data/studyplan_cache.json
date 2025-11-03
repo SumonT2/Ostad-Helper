@@ -1,6 +1,14 @@
 {
   "Items": [
     {
+      "BatchId": "68a5c89dc9c21f3bce498aeb",
+      "BatchCode": "Pro Flutter 9",
+      "BatchTitle": "Flutter Pro Batch",
+      "StudyPlanIds": [
+        "68ab0f696f28590941836bcd"
+      ]
+    },
+    {
       "BatchId": "67d133268522c9bf0e68705b",
       "BatchCode": "php laravel 8",
       "BatchTitle": "Full Stack Web Development with PHP, Laravel & Vue Js",
@@ -15,6 +23,7 @@
         "683d33421af9bde237756442",
         "67d133298522c9bf0e68710d",
         "67d133298522c9bf0e687113",
+        "686a5f3368577b00e4c64ddc",
         "67d133298522c9bf0e687119",
         "67d1332a8522c9bf0e687120",
         "67d1332a8522c9bf0e687127",
@@ -56,13 +65,14 @@
         "6832c10cc5f74cf00e922382",
         "67b8df44a1d6a959b3218de9",
         "67b8df39a1d6a959b3218cb1",
-        "67b8df3ca1d6a959b3218cfb",
-        "67b8df3ea1d6a959b3218d27",
-        "67b8df3ea1d6a959b3218d3e",
-        "67b8df45a1d6a959b3218e00",
-        "67b8df3da1d6a959b3218d11",
-        "67b8df3fa1d6a959b3218d5d",
+        "68594109c827249b4c9e5c42",
         "67b8df41a1d6a959b3218d8c",
+        "67b8df3ea1d6a959b3218d27",
+        "67b8df3da1d6a959b3218d11",
+        "67b8df45a1d6a959b3218e00",
+        "67b8df3ca1d6a959b3218cfb",
+        "67b8df3ea1d6a959b3218d3e",
+        "67b8df3fa1d6a959b3218d5d",
         "67b8df46a1d6a959b3218e1e",
         "67b8df43a1d6a959b3218db9",
         "67b8df42a1d6a959b3218da2",
@@ -161,7 +171,9 @@
         "672a12b1474c0ab783eff5b4",
         "672a12b2474c0ab783eff5ca",
         "672a1290474c0ab783eff228",
+        "6866522d37014169a709b8e7",
         "679f2496c63e609168559107",
+        "6878d70a2c26a24590271aa5",
         "679f252bc63e609168559166",
         "672a12a8474c0ab783eff4ad",
         "672a12a7474c0ab783eff486",
@@ -171,6 +183,7 @@
         "672a1291474c0ab783eff23f",
         "67d149745bc9b57fa0bf9d6b",
         "672a12b4474c0ab783eff5f6",
+        "68aab29f6ca46471bb6fc069",
         "672a12bd474c0ab783eff738",
         "672a129e474c0ab783eff3a4",
         "672a12ae474c0ab783eff564",
@@ -219,12 +232,16 @@
         "66c87542ca27f82d4d6e50c3",
         "66c87542ca27f82d4d6e50e7",
         "66c87542ca27f82d4d6e510d",
+        "6876566a424720484a1cb41b",
         "66c87543ca27f82d4d6e5133",
         "66c87543ca27f82d4d6e513c",
-        "66c87544ca27f82d4d6e516f",
+        "687373665097528c9782c0f9",
         "66c87543ca27f82d4d6e5148",
+        "66c87544ca27f82d4d6e516f",
         "66c87544ca27f82d4d6e5175",
-        "6832bbc860fdfc81cc5aa4b9"
+        "66c87544ca27f82d4d6e517b",
+        "66c87544ca27f82d4d6e5181",
+        "66c87544ca27f82d4d6e518f"
       ]
     }
   ]

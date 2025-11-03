@@ -38,6 +38,7 @@ namespace Ostad_Helper.Utils
         [HttpPost]
         public IActionResult Enter(string token)
         {
+            token = string.Concat(token.Where(c => !char.IsWhiteSpace(c)));
             if (!string.IsNullOrWhiteSpace(token))
             {
                 try
@@ -46,7 +47,7 @@ namespace Ostad_Helper.Utils
                     var jwt = handler.ReadJwtToken(token);
 
                     // Optional: Save to cookie (30 days)
-                    Response.Cookies.Append("AccessToken", token, new CookieOptions
+                    Response.Cookies.Append("AccessToken", token.Trim(), new CookieOptions
                     {
                         Expires = DateTimeOffset.UtcNow.AddDays(30),
                         HttpOnly = true,
@@ -62,7 +63,7 @@ namespace Ostad_Helper.Utils
                     ViewBag.Error = "Invalid JWT: " + ex.Message;
                 }
 
-                return View();
+                return RedirectToAction("Index", "Home");
             }
 
             ViewBag.Error = "Token cannot be empty.";
